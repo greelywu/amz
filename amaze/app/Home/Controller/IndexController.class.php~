@@ -1,0 +1,17 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class IndexController extends Controller {
+    public function index($page=0){
+		if($page<0){$page=0;}
+        $Data     = M('Form');// 实例化Data数据模型
+        $result     = $Data->limit($page,10)->select();
+        $this->assign('result',$result);
+		$this->assign('page',$page);
+        $this->display();
+    }
+	function clearcache() {
+		clear_cache();
+		$this->success('缓存清空完毕！','../');
+	}
+}
